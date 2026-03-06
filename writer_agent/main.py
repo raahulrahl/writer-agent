@@ -19,20 +19,17 @@ import json
 import os
 from pathlib import Path
 from textwrap import dedent
-from typing import Any, Optional
-
+from typing import Any
 
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from agno.models.openrouter import OpenRouter
 from agno.tools.mem0 import Mem0Tools
-
 from bindu.penguin.bindufy import bindufy
 from dotenv import load_dotenv
 
 # Import custom writing tools
-from .tools import ProjectTool, WriterTool, CompressionTool
-
+from .tools import CompressionTool, ProjectTool, WriterTool
 
 # Load environment variables from .env file
 load_dotenv()
@@ -53,12 +50,12 @@ _init_lock = asyncio.Lock()
 def initialize_writing_tools() -> None:
     """Initialize the custom writing tools."""
     global project_tool, writer_tool, compression_tool
-    
+
     # Initialize tools in dependency order
     project_tool = ProjectTool()
     writer_tool = WriterTool(project_tool)
     compression_tool = CompressionTool(project_tool)
-    
+
     print("✅ Writing tools initialized")
 
 
@@ -67,7 +64,7 @@ def load_config() -> dict:
     # Get path to agent_config.json in project root
     config_path = Path(__file__).parent / "agent_config.json"
 
-    with open(config_path, "r") as f:
+    with open(config_path) as f:
         return json.load(f)
 
 
@@ -82,11 +79,7 @@ async def initialize_agent() -> None:
 
     # Model selection logic (supports Moonshot, OpenAI, and OpenRouter)
     if moonshot_api_key and "kimi" in model_name.lower():
-        model = OpenAIChat(
-            id=model_name,
-            api_key=moonshot_api_key,
-            base_url="https://api.moonshot.ai/v1"
-        )
+        model = OpenAIChat(id=model_name, api_key=moonshot_api_key, base_url="https://api.moonshot.ai/v1")
         print(f"✅ Using Moonshot model: {model_name}")
     elif openrouter_api_key:
         model = OpenRouter(
@@ -97,23 +90,24 @@ async def initialize_agent() -> None:
         )
         print(f"✅ Using OpenRouter model: {model_name}")
     else:
-        raise ValueError("No valid API key provided for model selection")
+        error_msg = "No valid API key provided for model selection"
+        raise ValueError(error_msg)
 
     # Prepare tools list
-    tools = [tool for tool in [project_tool, writer_tool, compression_tool] if tool is not None]
-    
+    all_tools: list[Any] = [tool for tool in [project_tool, writer_tool, compression_tool] if tool is not None]
+
     # Add memory tools if API key is provided
     if mem0_api_key:
-        tools.append(Mem0Tools(api_key=mem0_api_key))
+        all_tools.append(Mem0Tools(api_key=mem0_api_key))
         print("🧠 Mem0 memory enabled")
 
     # Create the creative writing agent
     agent = Agent(
         name="Creative Writing Assistant",
         model=model,
-        tools=tools,
+        tools=all_tools,
         description=dedent("""\
-            You are Kimi, an expert creative writing assistant developed by Moonshot AI. 
+            You are Kimi, an expert creative writing assistant developed by Moonshot AI.
             Your specialty is creating novels, books, and collections of short stories based on user requests.
 
             Your capabilities:
@@ -145,8 +139,8 @@ async def initialize_agent() -> None:
             4. Write COMPLETE, FULL-LENGTH content for each file
             5. Create supporting files like README or table of contents if helpful
 
-            REMEMBER: You have access to large token limits - use them! Write rich, detailed, complete stories. 
-            Don't artificially limit yourself. A good short story is 5,000-10,000 words. A good chapter is 3,000-5,000 words. 
+            REMEMBER: You have access to large token limits - use them! Write rich, detailed, complete stories.
+            Don't artificially limit yourself. A good short story is 5,000-10,000 words. A good chapter is 3,000-5,000 words.
             Write what the narrative needs to be excellent.\
         """),
         instructions=dedent("""\
@@ -189,12 +183,12 @@ async def initialize_agent() -> None:
 async def cleanup_tools() -> None:
     """Clean up any tool resources."""
     global project_tool, writer_tool, compression_tool
-    
+
     # Reset tool instances
     project_tool = None
     writer_tool = None
     compression_tool = None
-    
+
     print("🧹 Writing tools cleaned up")
 
 
@@ -210,10 +204,11 @@ async def run_agent(messages: list[dict[str, str]]) -> Any:
     global agent
 
     # Run the agent and get response
+    if agent is None:
+        error_msg = "Agent not initialized"
+        raise ValueError(error_msg)
     response = await agent.arun(messages)
     return response
-
-
 
 
 async def handler(messages: list[dict[str, str]]) -> Any:
@@ -237,7 +232,6 @@ async def handler(messages: list[dict[str, str]]) -> Any:
     # Run the async agent
     result = await run_agent(messages)
     return result
-    
 
 
 async def initialize_all():
@@ -291,12 +285,14 @@ def main():
             model_name = "openai/gpt-4o"
             print(f"⚠️  Moonshot API key not found, falling back to OpenRouter with {model_name}")
         else:
-            raise ValueError("MOONSHOT_API_KEY required for Kimi models. Get your key from: https://platform.moonshot.cn/")
+            error_msg = "MOONSHOT_API_KEY required for Kimi models. Get your key from: https://platform.moonshot.cn/"
+            raise ValueError(error_msg)
     elif not moonshot_api_key and not openrouter_api_key:
-        raise ValueError("Either MOONSHOT_API_KEY or OPENROUTER_API_KEY required")
+        error_msg = "Either MOONSHOT_API_KEY or OPENROUTER_API_KEY required"
+        raise ValueError(error_msg)
 
-    print(f"🤖 Creative Writing Agent - AI-powered storytelling")
-    print(f"📝 Capabilities: Novels, books, short story collections")
+    print("🤖 Creative Writing Agent - AI-powered storytelling")
+    print("📝 Capabilities: Novels, books, short story collections")
     print(f"🧠 Model: {model_name}")
 
     # Load configuration

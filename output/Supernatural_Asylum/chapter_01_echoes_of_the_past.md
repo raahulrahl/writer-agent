@@ -1,8 +1,8 @@
-# Echoes of the Past  
+# Echoes of the Past
 
 Dr. Evelyn Carter stood at the entrance of St. Margery's Asylum, her eyes tracing the aged facade of the Gothic building. The asylum loomed in the grey afternoon light, its spires clawing at the overcast sky. Beside her, Thomas Hale adjusted his glasses, his eyes squinting as if trying to pierce the mysteries that lay beyond the moss-covered walls.
 
-"It hasn't changed a bit," Evelyn muttered, feeling the weight of history in the air—a foreboding that seemed to seep from the very stones of the asylum. 
+"It hasn't changed a bit," Evelyn muttered, feeling the weight of history in the air—a foreboding that seemed to seep from the very stones of the asylum.
 
 Thomas chuckled, though it lacked humor. "One would think the years have passed in vain," he said, brushing a fleck of dust from his coat. "But it's the very atmosphere we're here to explore, isn't it?"
 

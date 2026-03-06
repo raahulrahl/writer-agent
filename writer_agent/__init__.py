@@ -7,8 +7,7 @@
 #
 #  Thank you users! We ❤️ you! - 🌻
 
-"""writer-agent - An Bindu Agent.
-"""
+"""writer-agent - An Bindu Agent."""
 
 from writer_agent.__version__ import __version__
 from writer_agent.main import (

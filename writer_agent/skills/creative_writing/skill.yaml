@@ -101,13 +101,13 @@ allowed_tools:
 # Rich Documentation
 documentation:
   overview: |
-    The Creative Writing Assistant is an advanced AI agent specialized in generating complete, 
+    The Creative Writing Assistant is an advanced AI agent specialized in generating complete,
     substantial literary works. Unlike typical content generators that create summaries or outlines,
     this agent produces full-length novels, books, and short story collections with rich detail,
     character development, and narrative depth.
 
     Built on the Agno framework and inspired by the kimi-writer project, it combines the power
-    of the kimi-k2-thinking model with custom tools for project management, file writing, and 
+    of the kimi-k2-thinking model with custom tools for project management, file writing, and
     context compression. The agent can handle long-form writing projects while maintaining
     conversation continuity and organization.
 
