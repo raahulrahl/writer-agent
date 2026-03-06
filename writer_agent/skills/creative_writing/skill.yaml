@@ -1,0 +1,212 @@
+id: creative-writing-v1
+name: creative_writing
+version: 1.0.0
+author: paras@getbindu.com
+
+# Description
+description: |
+  AI-powered creative writing assistant that generates complete novels, books, and short story collections.
+  Capable of producing substantial, polished content with proper structure, character development, and narrative flow.
+  Built on the Agno framework with custom writing tools for project management and file organization.
+
+# Tags and Modes
+tags:
+  - creative-writing
+  - novel-generation
+  - short-stories
+  - book-writing
+  - fiction
+  - storytelling
+  - literature
+  - content-creation
+
+input_modes:
+  - text/plain
+  - application/json
+
+output_modes:
+  - text/plain
+  - application/json
+  - text/markdown
+
+# Example Queries
+examples:
+  - "Create a collection of 5 sci-fi short stories about artificial intelligence and consciousness"
+  - "Write a mystery novel set in Victorian London with 10 chapters, featuring a detective solving murders"
+  - "Generate a comprehensive guide to Python programming with 15 chapters for beginners"
+  - "Create a romance novel set in modern Tokyo with 8 chapters and a happy ending"
+  - "Write a collection of 7 interconnected fantasy stories exploring the theme of magic and technology"
+  - "Create a horror novel with psychological elements set in an abandoned asylum"
+  - "Generate a children's book with 12 chapters about friendship and adventure"
+
+# Detailed Capabilities
+capabilities_detail:
+  primary_capability:
+    supported: true
+    description: "Generates complete, substantial creative writing projects including novels, books, and short story collections"
+    features:
+      - "Creates organized project folders with sanitized names"
+      - "Writes substantial content (3,000-10,000 words per story/chapter)"
+      - "Manages multiple files with proper naming conventions"
+      - "Supports three writing modes: create, append, overwrite"
+      - "Automatic context compression for long projects"
+      - "Maintains narrative consistency and continuity"
+      - "Generates rich dialogue, descriptions, and character development"
+      - "Handles multiple genres and writing styles"
+    limitations: "Dependent on model token limits and API availability; very long projects may require context compression"
+
+  secondary_capability:
+    supported: true
+    description: "Provides project management and organization for creative writing workflows"
+    features:
+      - "Automatic project folder creation and management"
+      - "Context summarization and compression for long conversations"
+      - "File organization with descriptive naming"
+      - "Progress tracking and state management"
+      - "Support for collaborative writing workflows"
+
+# Requirements
+requirements:
+  packages:
+    - agno>=2.2.0
+    - bindu>=2026.9.4
+    - openai>=2.11.0
+    - python-dotenv>=1.0.1
+  system:
+    - "File system access for project and file creation"
+    - "Internet access for API communication"
+  min_memory_mb: 512
+  external_services:
+    - Moonshot AI API (for kimi-k2-thinking model)
+    - OpenRouter API (alternative models)
+    - Mem0 API (optional memory features)
+
+# Performance Metrics
+performance:
+  avg_processing_time_ms: 15000
+  avg_time_per_chapter_ms: 300000
+  max_concurrent_requests: 3
+  memory_per_request_mb: 1024
+  timeout_seconds: 300
+  max_words_per_request: 10000
+  scalability: horizontal
+
+# Tool Restrictions
+allowed_tools:
+  - ProjectTool
+  - WriterTool
+  - CompressionTool
+  - Mem0Tools
+
+# Rich Documentation
+documentation:
+  overview: |
+    The Creative Writing Assistant is an advanced AI agent specialized in generating complete, 
+    substantial literary works. Unlike typical content generators that create summaries or outlines,
+    this agent produces full-length novels, books, and short story collections with rich detail,
+    character development, and narrative depth.
+
+    Built on the Agno framework and inspired by the kimi-writer project, it combines the power
+    of the kimi-k2-thinking model with custom tools for project management, file writing, and 
+    context compression. The agent can handle long-form writing projects while maintaining
+    conversation continuity and organization.
+
+  use_cases:
+    when_to_use:
+      - "Creating complete novels with multiple chapters and character arcs"
+      - "Generating short story collections with thematic connections"
+      - "Writing comprehensive guides or educational books"
+      - "Developing fiction series with consistent world-building"
+      - "Creating substantial content for publishing or personal use"
+      - "Generating writing samples or portfolio pieces"
+      - "Exploring creative writing ideas with full execution"
+
+    when_not_to_use:
+      - "Generating very short content or summaries (other tools may be more efficient)"
+      - "Technical documentation or API references (use specialized documentation tools)"
+      - "Real-time chat or quick responses (this is designed for substantial content creation)"
+      - "Code generation or programming tasks (use specialized coding assistants)"
+      - "Simple factual questions or information retrieval"
+
+  input_structure: |
+    The agent accepts natural language requests for creative writing projects.
+
+    Example inputs:
+    - "Write a mystery novel set in 1920s Paris with 8 chapters"
+    - "Create 5 sci-fi short stories about time travel"
+    - "Generate a cookbook with 10 chapters of Italian recipes"
+    - "Write a fantasy novel about a young wizard discovering their powers"
+
+    Constraints:
+    - Requests should specify desired length and structure when possible
+    - Genre and setting preferences help guide the writing style
+    - Specific requirements (themes, character types, plot elements) are welcome
+    - The agent works best with clear, detailed creative briefs
+
+  output_structure: |
+    The agent generates organized writing projects with the following structure:
+
+    Project Folder Structure:
+    ```
+    output/project_name/
+    ├── chapter_01.md
+    ├── chapter_02.md
+    ├── story_title.md
+    ├── table_of_contents.md
+    ├── readme.md
+    └── .context_summary_*.md (auto-generated)
+    ```
+
+    Content Characteristics:
+    - Substantial length: 3,000-10,000 words per major piece
+    - Complete narratives: No summaries or placeholders
+    - Rich detail: Full dialogue, descriptions, and scenes
+    - Proper formatting: Markdown with clear structure
+    - Genre-appropriate: Style matches the requested category
+
+    Quality Standards:
+    - Narrative coherence and continuity
+    - Character development and consistency
+    - Proper pacing and story structure
+    - Engaging dialogue and vivid descriptions
+    - Appropriate tone and style for the genre
+
+  advanced_features:
+    - "Context Compression: Automatically manages long conversations by summarizing older content"
+    - "Project Management: Creates organized folder structures for complex projects"
+    - "Multi-file Support: Handles novels with multiple chapters or story collections"
+    - "Recovery Capabilities: Can resume interrupted projects from context summaries"
+    - "Memory Integration: Optional Mem0 integration for persistent project memory"
+    - "Flexible Writing Modes: Create new files, append existing content, or overwrite when needed"
+
+  best_practices:
+    - "Be specific about desired length, structure, and style"
+    - "Provide clear genre and setting preferences"
+    - "Include any specific themes or elements you want emphasized"
+    - "Let the agent work autonomously - it will plan and execute the full project"
+    - "Check the output folder for generated files during the process"
+    - "Use recovery mode if the agent is interrupted during long projects"
+
+  troubleshooting:
+    common_issues:
+      - "Incomplete content: Ensure you're requesting substantial works, not summaries"
+      - "File organization: Check the output folder for all generated files"
+      - "Context limits: The agent automatically compresses context for long projects"
+      - "Interruptions: Use context summaries to resume interrupted work"
+      - "Quality concerns: The agent writes complete works - allow time for full generation"
+
+    recovery_instructions:
+      - "If interrupted, check for .context_summary_*.md files in the project folder"
+      - "Restart the agent with the same project context"
+      - "The agent will continue from where it left off using saved summaries"
+
+# Integration Notes
+integration_notes: |
+  This skill integrates seamlessly with the Bindu agent framework and can be deployed
+  as a standalone service or as part of a larger agent ecosystem. The custom tools
+  are designed to work with the Agno framework's tool system while maintaining
+  compatibility with standard Bindu deployment patterns.
+
+  The agent supports both Moonshot AI (for optimal kimi-k2-thinking performance) and
+  OpenRouter (for alternative model access), making it flexible for different deployment
+  scenarios and budget considerations.

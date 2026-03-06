@@ -132,7 +132,7 @@ Create a collection of 7 interconnected horror stories set in an abandoned asylu
 {
   "messages": [
     {
-      "role": "user", 
+      "role": "user",
       "content": "Write a thriller novel with 8 chapters about a detective hunting a serial killer"
     }
   ]
@@ -163,7 +163,7 @@ output/your_project_name/
 
 ## 🔌 API Usage
 
-The agent exposes a RESTful API when running. Default endpoint: `http://localhost:3773` 
+The agent exposes a RESTful API when running. Default endpoint: `http://localhost:3773`
 
 ### Quick Start
 
@@ -340,9 +340,9 @@ uv run pre-commit run -a
 Contributions are welcome! Please follow these steps:
 
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature` 
-3. Commit your changes: `git commit -m 'Add amazing feature'` 
-4. Push to the branch: `git push origin feature/amazing-feature` 
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Commit your changes: `git commit -m 'Add amazing feature'`
+4. Push to the branch: `git push origin feature/amazing-feature`
 5. Open a Pull Request
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
